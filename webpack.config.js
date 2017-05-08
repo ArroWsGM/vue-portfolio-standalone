@@ -6,7 +6,7 @@ module.exports = {
     entry: {
         //'bootstrap-loader',
         app: './src/main.js',
-        vendors: ['axios', 'inputmask', 'vue', 'vue-router', 'vue-youtube-embed']
+        vendors: ['axios', 'vue', 'vue-masked-input', 'vue-router', 'vue-youtube-embed']
     },
     output: {
         path: path.resolve(__dirname, 'spa'),
@@ -57,14 +57,6 @@ module.exports = {
                     name: 'img/[name].[ext]?[hash]'
                 }
             },
-            // {
-            //     test: /glyphicons-halflings-regular\.(svg|eot|woff|woff2|ttf)$/,
-            //     loader: 'file-loader',
-            //     options: {
-            //         publicPath: './', //comment this if 'extractStyles: false' in .bootstraprc
-            //         name: 'fonts/glyphicons/[name].[ext]?[hash]'
-            //     }
-            // },
             {
                 test: /fontawesome-webfont\.(svg|eot|woff|woff2|ttf)$/,
                 loader: 'file-loader',

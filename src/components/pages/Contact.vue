@@ -76,14 +76,14 @@
                 <div class="field-body">
                     <div class="field">
                         <div class="control has-icons-left has-icons-right">
-                            <input class="input" type="tel" placeholder="+380(xx)xxx-xx-xx"
+                            <masked-input class="input" type="tel" placeholder="+380(xx)xxx-xx-xx"
                                     :class="{
-                                            'is-danger': (validation.hasError('message.phone') && message.phone.length > 0) || (response.e422 && response.e422.phone),
-                                            'is-success': validation.isPassed('message.phone') && message.phone.length > 0
+                                        'is-danger': (validation.hasError('message.phone') && message.phone.length > 0) || (response.e422 && response.e422.phone),
+                                        'is-success': validation.isPassed('message.phone') && message.phone.length > 0
                                     }"
                                     v-model.trim="message.phone"
-                                    ref="phone"
-                            >
+                                    mask="\+\380(11)111-11-11"
+                            ></masked-input>
                             <span class="icon is-small is-left">
                             <i class="fa fa-phone-square"></i>
                         </span>
@@ -195,17 +195,12 @@
 </template>
 
 <script>
-    import 'inputmask/dist/inputmask/inputmask.numeric.extensions'
-    import Inputmask from 'inputmask/dist/inputmask/inputmask.phone.extensions'
-
+    import MaskedInput from 'vue-masked-input'
     import arrRequired from '../elements/Tooltip.vue'
     import arrAlert from '../elements/Alert.vue'
-
     import { _bus } from '../../_bus'
-
     import { mixin } from 'simple-vue-validator'
     import { Validator } from 'simple-vue-validator'
-
     export default {
         data() {
             return {
@@ -322,10 +317,6 @@
                     })
             }
         },
-        mounted(){
-            let mask = new Inputmask("+380(99)999-99-99")
-            mask.mask(this.$refs.phone)
-        },
         validators: {
             'message.name': value => Validator.value(value).required().lengthBetween(2,128),
             'message.email': value => Validator.value(value).email(),
@@ -334,6 +325,7 @@
             'message.message': value => Validator.value(value).required().minLength(10),
         },
         components: {
+            MaskedInput,
             arrRequired,
             arrAlert
         },
