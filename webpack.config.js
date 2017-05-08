@@ -6,7 +6,7 @@ module.exports = {
     entry: {
         //'bootstrap-loader',
         app: './src/main.js',
-        vendors: ['axios', 'vue', 'vue-masked-input', 'vue-router', 'vue-youtube-embed']
+        vendors: ['axios', 'inputmask', 'vue', 'vue-router', 'vue-youtube-embed']
     },
     output: {
         path: path.resolve(__dirname, 'spa'),
