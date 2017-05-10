@@ -69,7 +69,7 @@
             <!--
                 Phone
             -->
-            <div class="field is-horizontal">
+            <div class="field is-horizontal" v-if="!isOldBrowser">
                 <div class="field-label is-normal">
                     <label class="label">{{ i18n.phone }}</label>
                 </div>
@@ -84,6 +84,40 @@
                                     v-model.trim="message.phone"
                                     mask="\+\380(11)111-11-11"
                             ></masked-input>
+                            <span class="icon is-small is-left">
+                            <i class="fa fa-phone-square"></i>
+                        </span>
+                            <span class="icon is-small is-right is-danger"
+                                  v-if="(validation.hasError('message.phone') && message.phone.length > 0) || (response.e422 && response.e422.phone)"
+                            >
+                            <i class="fa fa-warning"></i>
+                        </span>
+                            <span class="icon is-small is-right is-success" v-if="validation.isPassed('message.phone') && message.phone.length > 0">
+                            <i class="fa fa-check"></i>
+                        </span>
+                        </div>
+                        <p class="help is-danger has-text-left" v-if="validation.hasError('message.phone')">{{ i18n.validatephone }}</p>
+                        <p class="help is-danger has-text-left" v-if="response.e422 && response.e422.phone">{{ response.e422.phone[0] }}</p>
+                    </div>
+                </div>
+            </div>
+            <!--
+                Phone old browsers
+            -->
+            <div class="field is-horizontal" v-if="isOldBrowser">
+                <div class="field-label is-normal">
+                    <label class="label">{{ i18n.phone }}</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" type="tel" placeholder="+380(xx)xxx-xx-xx"
+                                    :class="{
+                                        'is-danger': (validation.hasError('message.phone') && message.phone.length > 0) || (response.e422 && response.e422.phone),
+                                        'is-success': validation.isPassed('message.phone') && message.phone.length > 0
+                                    }"
+                                    v-model.trim="message.phone"
+                            >
                             <span class="icon is-small is-left">
                             <i class="fa fa-phone-square"></i>
                         </span>
@@ -230,6 +264,9 @@
             },
             i18n(){
                 return _bus.i18n[_bus.locale]
+            },
+            isOldBrowser(){
+                return isOldBrowser
             }
         },
         watch: {
