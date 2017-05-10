@@ -196,18 +196,17 @@
                                     class="button is-danger is-outlined is-animated"
                                     :to="'/'"
                             >
-                            <span class="icon">
-                                <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                            </span>
+                                <span class="icon"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
                                 <span>{{ i18n.back }}</span>
                             </router-link>
                             <button class="button is-success is-outlined is-animated is-pulled-right"
                                     :disabled="disabled"
                                     @click="submit"
                             >
-                                <span>{{ i18n.send }}</span>
-                                <span class="icon">
-                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                <span style="display: inline-flex; align-items: center; justify-content: center;"><!--Firefox < 52 <button> and <input type="button"> display property bug fix-->
+                                    <span>{{ i18n.send }}</span>
+                                    <span class="icon"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                                </span>
                             </span>
                             </button>
                         </div>
